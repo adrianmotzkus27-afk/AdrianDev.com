@@ -1,0 +1,521 @@
+:root {
+  color-scheme: dark;
+  --bg: #100a0a;
+  --surface: rgba(20, 10, 10, 0.95);
+  --surface-strong: #1f0e0e;
+  --text: #f6f0ee;
+  --text-muted: #d1b0b0;
+  --accent: #c31f1f;
+  --accent-soft: rgba(195, 31, 31, 0.18);
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: radial-gradient(circle at top, rgba(195, 31, 31, 0.2), transparent 35%),
+    linear-gradient(180deg, #150b0b 0%, #090505 100%);
+  color: var(--text);
+}
+
+.fullscreen-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 25% 15%, rgba(195, 31, 31, 0.25), transparent 24%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08), transparent 15%),
+    radial-gradient(circle at 50% 85%, rgba(255, 255, 255, 0.04), transparent 20%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+main {
+  padding: 24px;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.card,
+.app-shell,
+.panel {
+  background: rgba(20, 10, 10, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.auth-card,
+.panel {
+  padding: 28px;
+}
+
+.auth-card {
+  max-width: 520px;
+  margin: 60px auto;
+}
+
+.hero-panel {
+  background: linear-gradient(135deg, rgba(195, 31, 31, 0.22), rgba(0, 0, 0, 0.7));
+}
+
+.hero-content {
+  display: grid;
+  gap: 28px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #ff7979;
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+.hero-content h2 {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  max-width: 680px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hero-stats div {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hero-stats strong {
+  display: block;
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+
+.panel-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.hire-summary {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 22px;
+}
+
+.hire-list-container {
+  display: grid;
+  gap: 20px;
+}
+
+.chat-panel {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 320px minmax(0, 1fr);
+}
+
+.chat-sidebar {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.chat-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-list {
+  display: grid;
+  gap: 14px;
+  max-height: 480px;
+  overflow: auto;
+}
+
+.contact-card {
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+.contact-card.active,
+.contact-card:hover {
+  background: rgba(195, 31, 31, 0.22);
+}
+
+.chat-quick-form {
+  display: grid;
+  gap: 12px;
+}
+
+.chat-content {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.chat-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 16px;
+}
+
+.message-list {
+  display: grid;
+  gap: 14px;
+  min-height: 320px;
+  max-height: 460px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.message-item {
+  max-width: 75%;
+  padding: 16px;
+  border-radius: 20px;
+  line-height: 1.5;
+}
+
+.message-item.incoming {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.message-item.outgoing {
+  align-self: flex-end;
+  background: rgba(195, 31, 31, 0.3);
+}
+
+.chat-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+}
+
+.chat-form input {
+  min-width: 0;
+}
+
+.contact-card {
+  user-select: none;
+}
+
+.message-item {
+  word-break: break-word;
+}
+
+@media (max-width: 960px) {
+  .chat-panel,
+  .panel-grid,
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+  .chat-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+h1,
+h2,
+p,
+label {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.tab-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 24px 0 20px;
+}
+
+.tab,
+.primary-button,
+.secondary-button,
+.nav-button,
+.close-button {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.tab {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+}
+
+.tab.active,
+.tab:hover,
+.primary-button:hover,
+.secondary-button:hover,
+.nav-button:hover,
+.close-button:hover {
+  transform: translateY(-1px);
+}
+
+.tab.active,
+.primary-button {
+  background: linear-gradient(135deg, #c31f1f, #ff4d4d);
+  color: white;
+  box-shadow: 0 12px 35px rgba(195, 31, 31, 0.35);
+}
+
+.secondary-button,
+.nav-button,
+.close-button {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-color: rgba(255,255,255,0.14);
+}
+
+.secondary-button,
+.nav-button,
+.close-button {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.auth-form {
+  display: grid;
+  gap: 14px;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid rgba(195, 31, 31, 0.7);
+  outline-offset: 2px;
+}
+
+button {
+  border: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.message {
+  margin-top: 18px;
+  min-height: 22px;
+  color: #f4baba;
+}
+
+.app-shell {
+  padding: 24px;
+  margin-top: 40px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.main-nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.nav-button {
+  min-width: 110px;
+  letter-spacing: 0.02em;
+}
+
+.nav-button {
+  min-width: 110px;
+}
+
+.nav-button.active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.screen {
+  display: none;
+}
+
+.active-screen {
+  display: block;
+}
+
+.upload-area {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 36px;
+  text-align: center;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.upload-area:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.upload-area p {
+  margin-bottom: 18px;
+}
+
+.video-list,
+.hire-list {
+  display: grid;
+  gap: 18px;
+}
+
+.hire-group {
+  margin-top: 24px;
+}
+
+.hire-group h3 {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+}
+
+.video-card,
+.hire-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 24px;
+  overflow: hidden;
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+}
+
+.video-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hire-card button {
+  width: fit-content;
+}
+
+.video-card video {
+  width: 100%;
+  border-radius: 16px;
+  background: black;
+}
+
+.video-card h3,
+.hire-card h3 {
+  margin: 0;
+}
+
+.hire-card {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.hire-card button {
+  min-width: 120px;
+}
+
+.empty-state {
+  padding: 40px;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.67);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 30;
+}
+
+.modal-content {
+  width: min(560px, 100%);
+  background: rgba(20, 10, 10, 0.98);
+  border-radius: 28px;
+  padding: 30px;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 720px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hire-card {
+    grid-template-columns: 1fr;
+  }
+}
