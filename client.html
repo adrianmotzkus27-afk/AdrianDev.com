@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdrianDev Live Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="fullscreen-bg"></div>
+  <main>
+    <section class="card auth-card" id="client-auth">
+      <h1>Live Chat</h1>
+      <p>Gib deinen Namen ein und trete einem Chat-Raum bei, um live mit Adrian zu schreiben.</p>
+      <form id="join-form" class="auth-form">
+        <label for="client-name-input">Dein Name</label>
+        <input id="client-name-input" type="text" placeholder="Dein Name" required />
+        <label for="chat-room-input">Chat-Raum</label>
+        <input id="chat-room-input" type="text" placeholder="Z.B. Projekt123" required />
+        <button type="submit" class="primary-button">Chat betreten</button>
+      </form>
+      <div id="join-message" class="message"></div>
+    </section>
+
+    <section class="app-shell hidden" id="client-chat-screen">
+      <div class="panel chat-panel">
+        <section class="chat-content">
+          <header class="chat-header">
+            <div>
+              <h3 id="chat-title">Live Chat</h3>
+              <p id="chat-subtitle">Verbunden mit dem Raum.</p>
+            </div>
+          </header>
+          <div id="message-list" class="message-list"></div>
+          <form id="chat-form" class="chat-form">
+            <input id="chat-input" type="text" placeholder="Schreibe eine Nachricht..." required />
+            <button type="submit" class="primary-button">Senden</button>
+          </form>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="public-client.js"></script>
+  <script>
+    const joinForm = document.getElementById("join-form");
+    const clientAuth = document.getElementById("client-auth");
+    const clientChatScreen = document.getElementById("client-chat-screen");
+    const joinMessage = document.getElementById("join-message");
+    const clientNameInput = document.getElementById("client-name-input");
+    const chatRoomInput = document.getElementById("chat-room-input");
+
+    joinForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = clientNameInput.value.trim();
+      const room = chatRoomInput.value.trim();
+      if (!name || !room) {
+        joinMessage.textContent = "Bitte gib Namen und Raum an.";
+        return;
+      }
+      clientAuth.classList.add("hidden");
+      clientChatScreen.classList.remove("hidden");
+      window.chatSender = name;
+      window.chatRole = "user";
+      window.joinChatRoom(room, name, "user");
+    });
+  </script>
+</body>
+</html>
